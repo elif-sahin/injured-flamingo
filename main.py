@@ -1,26 +1,49 @@
 
 
-import simpleaudio as sa
+import vlc
+
+class Funct:
+    def playmp3(self):
+        p = vlc.MediaPlayer("/Users/emre/balance.mp3")
+        p.play()
+        a = p.play()
+        print(a)
+
+        print(p.is_playing())
 
 
+    def playwav(self):
+        p = vlc.MediaPlayer("/Users/emre/bass.wav")
+        p.play()
 
-class Audio:
-    def wav(self):
-        wave_obj = sa.WaveObject.from_wave_file('/Users/emre/bass.wav')
-        play_obj = wave_obj.play()
-        play_obj.wait_done()
-    def mp3(self):
-        wave_obj = sa.WaveObject.from_wave_file('/Users/emre/balance.mp3')
-        play_obj = wave_obj.play()
-        play_obj.wait_done()
+        while p.is_playing():
+            pass
+
 
 def main():
-    Audio.wav(Audio)
+    print("1: Play mp3 \n")
+    print("2: Play wav \n")
+
+    switch = input()
+
+    if switch == "1":
+        Funct.playmp3(Funct)
+
+    elif switch == "2":
+        Funct.playwav(Funct)
+
+
+
+
+
+
+
+
+
 
 
 if __name__ == '__main__':
     main()
-
 
 
 

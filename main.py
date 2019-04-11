@@ -31,6 +31,7 @@ def main():
 
     elif switch == "2":
         Funct.playwav(Funct)
+    print("hi bitch")
 
 
 

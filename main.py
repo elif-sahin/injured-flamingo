@@ -11,19 +11,34 @@ def chooseFile():
 
 def playMusic():
     file_path = chooseFile()
-    p = vlc.MediaPlayer(file_path)
 
-    p.play()
-
+    instance = vlc.Instance()
+    player = instance.media_player_new()
+    media = instance.media_new(file_path)
+    print(file_path)
+    media.get_mrl()
+    player.set_media(media)
+    player.play()
+    playing = set([1,2,3,4])
+    time.sleep(1)  # Give time to get going
+    duration = player.get_length() / 1000
+    mm, ss = divmod(duration, 60)
+    print("Playing", file_path, "Length:", "%02d:%02d" % (mm, ss))
     while True:
-        pass
+        state = player.get_state()
+        print(player.get_state())
+        if state not in playing:
+            break
+        continue
+
+
 def playmp3list():
     """
     p = vlc.MediaPlayer("Whatsapp.mp3")
 
     p.play()"""
 
-    song_list = ["Whatsapp.mp3","michael.mp3"]
+    song_list = ["Whatsapp.mp3"]
     instance = vlc.Instance()
     for song in song_list:
         player = instance.media_player_new()
@@ -49,8 +64,11 @@ def playwav(self):
     p = vlc.MediaPlayer("/Users/emre/bass.wav")
     p.play()
 
-    while p.is_playing():
-        pass
+    while True:
+        state = p.get_state()
+        if state != 1:
+            break
+        continue
 
 
 def main():
@@ -81,8 +99,5 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
 
 
